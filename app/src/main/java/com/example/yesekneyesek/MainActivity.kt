@@ -3,12 +3,19 @@ package com.example.yesekneyesek
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.border
+import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import com.example.yesekneyesek.models.Meal
 import com.example.yesekneyesek.ui.theme.YesekNeYesekTheme
 
@@ -28,9 +35,32 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(tempMeal: Meal) {
-    Column {
-        Text(text = "Hello ${tempMeal.name}!")
-        Text(text = "type: ${tempMeal.type}")
+    Row(modifier = Modifier.padding(all = 8.dp)){
+        Image(painter = painterResource(id = R.drawable.ic_launcher_foreground),
+            contentDescription = "Drawable to understand",
+            modifier = Modifier
+                .size(40.dp)
+                .clip(CircleShape)
+                .border(1.5.dp,MaterialTheme.colors.secondary, CircleShape))
+
+        Spacer(modifier = Modifier.width(8.dp)) // adds a horizontal space between the image and the column
+
+        Column {
+            Text(
+                text = "Hello ${tempMeal.name}!",
+                color = MaterialTheme.colors.secondaryVariant,
+                style = MaterialTheme.typography.subtitle2
+            )
+            //adds a vertical space between two texts
+            Spacer(modifier = Modifier.height(4.dp))
+
+            Surface(shape = MaterialTheme.shapes.medium, elevation = 1.dp){
+                Text(
+                    text = "type: ${tempMeal.type}",
+                    style = MaterialTheme.typography.body2
+                )
+            }
+        }
     }
 }
 
